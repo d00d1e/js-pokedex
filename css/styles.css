@@ -1,0 +1,32 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+    display: ;
+    text-align: center;
+    padding: 50px;
+
+}
+.main {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page_header {
+    margin: auto;
+	width: 100%;
+	padding: 20px;
+	border-bottom: 1px solid lightgray;
+}
+
+#poke_logo {
+    width: 400px;
+    height: auto;
+}
+
+#footer_logo{
+    width: 30px;
+    height:30px;
+}
+

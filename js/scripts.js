@@ -5,14 +5,33 @@ var pokeRepository = [
   { name: "Blastoise", height: 1.6, type: ["water"] }
 ];
 
-for (var i = 0; i < pokeRepository.length; i++) {
-  var name = pokeRepository[i].name;
-  var height = pokeRepository[i].height;
+// for loop
+// function printRepository(list) {
+//   for (var i = 0; i < list.length; i++) {
+//     var name = list[i].name;
+//     var height = list[i].height;
+//     var size;
+//     if (height > 1) {
+//       size = "Wow, that's big!";
+//       document.write("<p>" + name + "- Height: " + height + " <--- " + size + "</p>");
+//     } else {
+//       document.write("<p>"+ name + "- Height: " + height + "</p>");
+//     }
+//   }
+// }
+
+// printRepository(pokeRepository);
+
+// forEach loop
+pokeRepository.forEach(function(i){
+  var name = i.name;
+  var height = i.height;
   var size;
+  
   if (height > 1) {
     size = "Wow, that's big!";
-    document.write(name + "- Height: " + height + " <--- " + size + "</br>");
+    document.write("<p>" + name + "- Height: " + height + " <--- " + size + "</p>");
   } else {
-    document.write(name + "- Height: " + height + "</br>");
+    document.write("<p>"+ name + "- Height: " + height + "</p>");
   }
-}
+});

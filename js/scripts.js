@@ -1,31 +1,37 @@
-var pokeRepository = [
-  { name: "Bulbasaur", height: 0.7, type: ["grass", "poison"] },
-  { name: "Charmander", height: 0.6, type: ["fire"] },
-  { name: "Squirtle", height: 0.5, type: ["water"] },
-  { name: "Blastoise", height: 1.6, type: ["water"] }
-];
+// Create IIFE to prevent repository array from being accessed globally
+var pokeRepository = (function() {
+  var repository = [
+    { name: 'Bulbasaur', height: 0.7, type: ['grass', 'poison'] },
+    { name: 'Charmander', height: 0.6, type: ['fire'] },
+    { name: 'Squirtle', height: 0.5, type: ['water'] },
+    { name: 'Blastoise', height: 1.6, type: ['water'] }
+  ];
 
-// for loop
-// function printRepository(list) {
-//   for (var i = 0; i < list.length; i++) {
-//     var name = list[i].name;
-//     var height = list[i].height;
-//     var size;
-//     if (height > 1) {
-//       size = "Wow, that's big!";
-//       document.write("<p>" + name + "- Height: " + height + " <--- " + size + "</p>");
-//     } else {
-//       document.write("<p>"+ name + "- Height: " + height + "</p>");
-//     }
-//   }
-// }
+  //function to add pokemon to repository
+  function add(pokemon) {
+    //add conditional for format
+    if (typeof pokemon === 'object') {
+      repository.push(pokemon);
+    } 
+    //add else conditional here
+  }
+  
+  //function to 
+  function getAll() {
+    return repository;
+  }
 
-// printRepository(pokeRepository);
+  return {
+    add: add,
+    getAll: getAll
+  };
+})();
+
 
 // forEach loop
-pokeRepository.forEach(function(i){
-  var name = i.name;
-  var height = i.height;
+pokeRepository.getAll().forEach(function(pokemon){
+  var name = pokemon.name;
+  var height = pokemon.height;
   var size;
   
   if (height > 1) {
@@ -35,3 +41,5 @@ pokeRepository.forEach(function(i){
     document.write("<p>"+ name + "- Height: " + height + "</p>");
   }
 });
+
+

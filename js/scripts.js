@@ -1,13 +1,9 @@
-// Create IIFE to prevent repository array from being accessed globally
+//IIFE- prevents assessing of variables globally
 var pokeRepository = (function() {
-  var repository = [
-    { name: 'Bulbasaur', height: 0.7, type: ['grass', 'poison'] },
-    { name: 'Charmander', height: 0.6, type: ['fire'] },
-    { name: 'Squirtle', height: 0.5, type: ['water'] },
-    { name: 'Blastoise', height: 1.6, type: ['water'] }
-  ];
+  var repository = [];
+  var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'
 
-  //Function to add new pokemon and corresponding button
+  //Add new pokemon and corresponding button
   function addListItem(pokemon) {
     var $pokemonList = document.querySelector('.pokemon-list');
     var listItem = document.createElement('li');
@@ -20,27 +16,62 @@ var pokeRepository = (function() {
     buttonClick(button, pokemon);
   }
 
-  //Function for event listener on button click
+  //Fetch data from API and add(pokemon) to repository
+  function loadList() {
+    return fetch(apiUrl).then(function(response){
+      return response.json();
+    }).then(function(json){
+      json.results.forEach(function(item) {
+        var pokemon = {
+          name: item.name,
+          detailsUrl: item.url,
+        };
+        add(pokemon);
+      });
+    }).catch(function(e) {
+      console.error(e);
+    })
+  }
+
+  //Load detailed data for a given Pokemon
+  function loadDetails(item) {
+    var url = item.detailsUrl;
+    return fetch(url).then(function(response) {
+      return response.json();
+    }).then(function(details) {
+      //add details to items
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = Object.keys(details.types);
+    }).catch(function(e) {
+      console.error(e);
+    })
+  }
+
+  //Adds event listener on button click
   function buttonClick (button, pokemon) {
     button.addEventListener('click', function(event) {
       showDetails(pokemon);
     })
   }
 
-  //
+  //Loads 
   function showDetails(pokemon) { 
-    console.log(pokemon);
+    pokeRepository.loadDetails(pokemon).then(function() {
+      console.log(pokemon);
+    });
   }
 
-  //Function to add a pokemon to repository
+  //Add a pokemon to repository
   function add(pokemon) {
-    //add conditional for format
+    //add conditional for format --- VALIDATING KEYS 
+    // (REVIEW AGAIN)
     if (typeof pokemon === 'object') {
       repository.push(pokemon);
     }
   }
   
-  //Function to list all pokemon objects in repository 
+  //List all pokemon objects in repository 
   function getAll() {
     return repository;
   }
@@ -49,14 +80,20 @@ var pokeRepository = (function() {
   return {
     add: add,
     getAll: getAll,
-    addListItem: addListItem
+    addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails
   };
 })();
 
 
-pokeRepository.getAll().forEach(function(pokemon) {
-  pokeRepository.addListItem(pokemon);
-});
+pokeRepository.loadList().then(function() {
+  pokeRepository.getAll().forEach(function(pokemon) {
+    pokeRepository.addListItem(pokemon);
+  });
+})
+
+
 
 // forEach loop
 // pokeRepository.getAll().forEach(function(pokemon){
@@ -73,5 +110,6 @@ pokeRepository.getAll().forEach(function(pokemon) {
 // });
 
 
-console.log(pokeRepository.addListItem({name: 'Mew', height: 0.4, type: ['psychic']}))
-console.log(pokeRepository.getAll());
+// console.log(pokeRepository.addListItem({name: 'Mew', height: 0.4, type: ['psychic']}))
+// console.log(pokeRepository.getAll());
+console.log(pokeRepository.showDetails());

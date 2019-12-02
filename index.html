@@ -4,25 +4,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Pokedex</title>
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323&display=swap">
 	<link rel="shortcut icon" type="image/png" href="img/pokemon.png">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 </head>
-
 <body>
 	<header class="page_header">
-		<img id="poke_logo" src="img/pokemon_logo.svg" alt="pokemon logo" />
+		<h1>POKÉDEX</h1>
+		<h3>Gen. 1</h3>
 	</header>
 
 	<div class="main">
-		<ul class='pokemon-list'>
-
-		</ul>
+		<ul class='pokemon-list'></ul>
 	</div>
+	<div id="modal-container"></div>
 
-	<!-- <footer>
-		<img id="footer_logo" src="assets/img/pokeball.svg" alt="pokeball">
-	</footer> -->
-	
 	<!-- promise-polyfill (load before fetch-polyfill)-->
 	<script src="js/promise-polyfill.js"></script>
 	<!-- fetch-polyfill -->

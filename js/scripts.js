@@ -2,13 +2,13 @@
 var pokeRepository = (function() {
   var repository = [];
   var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
-  var $modalContainer = document.querySelector('#modal-container');
-  
-  //MODAL 
+  var modalContainer = document.querySelector('#modal-container');
+
+  //MODAL
   //show and specify content for modal
   function showModal(item) {
-    $modalContainer.innerHTML = '';
-    
+    modalContainer.innerHTML = '';
+
     var modal = document.createElement('div');
     modal.classList.add('modal');
 
@@ -40,19 +40,19 @@ var pokeRepository = (function() {
     modal.appendChild(imageElement);
     modal.appendChild(heightElement);
     modal.appendChild(typeElement);
-    $modalContainer.appendChild(modal);
+    modalContainer.appendChild(modal);
 
-    $modalContainer.classList.add('is-visible');
+    modalContainer.classList.add('is-visible');
   }
 
-  //Function to hide modal 
+  //Function to hide modal
   function hideModal(){
-    $modalContainer.classList.remove('is-visible');
+    modalContainer.classList.remove('is-visible');
   }
-    
+
   //close modal with ESC-key
   window.addEventListener('keydown', (e) =>{
-    if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')){
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')){
       hideModal();
     }
   });
@@ -61,7 +61,7 @@ var pokeRepository = (function() {
   window.addEventListener('click', (e) =>{
     var target = e.target;
     //closes when user clicks directly on overlay
-    if (target === $modalContainer) {
+    if (target === modalContainer) {
       hideModal();
     }
   });
@@ -71,7 +71,7 @@ var pokeRepository = (function() {
     var $pokemonList = document.querySelector('.pokemon-list');
     var listItem = document.createElement('li');
     var button = document.createElement('button');
-    
+
     button.innerText = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
     button.classList.add('pokemon-button');
     listItem.appendChild(button);
@@ -117,7 +117,7 @@ var pokeRepository = (function() {
   }
 
   //Show pokemon details
-  function showDetails(pokemon) { 
+  function showDetails(pokemon) {
     pokeRepository.loadDetails(pokemon).then(function() {
       console.log(pokemon);
       //ADD MODAL FUNCTIONALITY HERE!
@@ -134,14 +134,14 @@ var pokeRepository = (function() {
 
   //Add a pokemon to repository
   function add(pokemon) {
-    //add conditional for format --- VALIDATING KEYS 
+    //add conditional for format --- VALIDATING KEYS
     // (REVIEW AGAIN)
     if (typeof pokemon === 'object') {
       repository.push(pokemon);
     }
   }
-  
-  //Return all pokemon objects in array 
+
+  //Return all pokemon objects in array
   function getAll() {
     return repository;
   }
@@ -159,17 +159,13 @@ var pokeRepository = (function() {
   };
 })();
 
-//
+//Load data
 pokeRepository.loadList().then(function() {
   //Data now loaded
   pokeRepository.getAll().forEach(function(pokemon) {
     pokeRepository.addListItem(pokemon);
   });
 })
-
-//MODAL control
-
-
 
 // console.log(pokeRepository.addListItem({name: 'Mew', height: 0.4, type: ['psychic']}))
 // console.log(pokeRepository.getAll());

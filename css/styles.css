@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
 }
 
 body {
@@ -8,15 +8,15 @@ body {
   padding: 50px;
 }
 
-.main {
+.container {
   margin: 0 auto;
-  padding: 20px;
+  padding: 1rem;
 }
 
 .page_header {
   margin: auto;
-	width: 100%;
-	padding: 20px;
+  width: 100%;
+  padding: 20px;
   border-bottom: 1px solid lightgray;
   font-size: 20px;
 }
@@ -38,7 +38,6 @@ body {
 .pokemon-button:hover {
   background-color: white;
 }
-
 
 /* MODAL  */
 #modal-container {
@@ -86,7 +85,7 @@ body {
   text-decoration: none;
 }
 
-.modal-img{
+.modal-img {
   width: 200px;
   height: auto;
 }
